@@ -17,6 +17,19 @@
 ---
 
 `markitdownllm` converts PDF, DOCX, XLSX, PPTX, HTML, CSV, EPUB and more to clean, structured Markdown — **entirely in the browser**, with zero server calls and zero data leaving the device.
+<figure style="text-align:center;">
+  <img
+    src="https://raw.githubusercontent.com/CodeBreaker444/markitdownllm-npm/main/markitdownllm.png"
+    alt="MarkItDown"
+    width="88"
+    height="88"
+    style="border-radius:20px;margin-bottom:12px"
+  />
+  <figcaption style="margin-top:8px;font-size:14px;color:#666;">
+    marktidownllm.com - Live site
+  </figcaption>
+</figure>
+
 
 Ported from [Microsoft's MarkItDown](https://github.com/microsoft/markitdown) Python library. Same architecture, same converter pipeline, same LLM-optimised output — running natively in any modern browser.
 
@@ -298,7 +311,7 @@ npm run test:coverage # coverage report
 ## Related
 
 - [MarkItDown Python](https://github.com/microsoft/markitdown) — the original Python library this is ported from
-- [markitdownllm Next.js app](https://markitdownllm.com) — ready-to-use drag-and-drop UI built on this package
+- [MarkItDownLLM Tool](https://markitdownllm.com) — ready-to-use drag-and-drop UI built on this package
 
 ---
 
