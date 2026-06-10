@@ -1,6 +1,6 @@
 {
   "name": "markitdownllm",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Browser-native document-to-Markdown converter for LLM pipelines. Converts PDF, DOCX, XLSX, PPTX, HTML, CSV, EPUB and more — entirely client-side, no server required.",
   "type": "module",
   "main": "./dist/index.cjs",
