@@ -23,11 +23,14 @@
     alt="MarkItDown"
     style="border-radius:5px;"
   />
-  <figcaption style="margin-top:8px;font-size:14px;color:#666;">
-    marktidownllm.com - Live site
+
   </figcaption>
 </figure>
+<div align="center">
 
+`markitdownllm.com - Live Site`
+
+</div>
 
 Ported from [Microsoft's MarkItDown](https://github.com/microsoft/markitdown) Python library. Same architecture, same converter pipeline, same LLM-optimised output — running natively in any modern browser.
 
