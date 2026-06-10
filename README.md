@@ -21,9 +21,7 @@
   <img
     src="https://raw.githubusercontent.com/CodeBreaker444/markitdownllm-npm/main/markitdownllm.png"
     alt="MarkItDown"
-    width="88"
-    height="88"
-    style="border-radius:20px;margin-bottom:12px"
+    style="border-radius:5px;"
   />
   <figcaption style="margin-top:8px;font-size:14px;color:#666;">
     marktidownllm.com - Live site
