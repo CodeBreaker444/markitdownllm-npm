@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./logo.svg" alt="MarkItDown" width="88" height="88" style="border-radius:20px;margin-bottom:12px" />
+<img src="https://raw.githubusercontent.com/codebreaker444/markitdownllm-npm/77992618244a4b0e25d3923423191986fe72b868/logo.svg" alt="MarkItDown" width="88" height="88" style="border-radius:20px;margin-bottom:12px" />
 
 ## MarkItDownLLM
 
