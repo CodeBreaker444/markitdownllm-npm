@@ -3,6 +3,7 @@
 var TurndownService = require('turndown');
 var turndownPluginGfm = require('@joplin/turndown-plugin-gfm');
 
+var _documentCurrentScript = typeof document !== 'undefined' ? document.currentScript : null;
 function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
 
 var TurndownService__default = /*#__PURE__*/_interopDefault(TurndownService);
@@ -708,7 +709,10 @@ function detectTableRegions(rows) {
 }
 async function pdfToMarkdown(arrayBuffer) {
   const pdfjsLib = await import('pdfjs-dist');
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+  pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+    "pdfjs-dist/build/pdf.worker.min.mjs",
+    (typeof document === 'undefined' ? require('u' + 'rl').pathToFileURL(__filename).href : (_documentCurrentScript && _documentCurrentScript.tagName.toUpperCase() === 'SCRIPT' && _documentCurrentScript.src || new URL('index.cjs', document.baseURI).href))
+  ).href;
   const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
   const pages = [];
   for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {

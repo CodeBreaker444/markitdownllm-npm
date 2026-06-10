@@ -167,9 +167,13 @@ function detectTableRegions(
 
 async function pdfToMarkdown(arrayBuffer: ArrayBuffer): Promise<string> {
   const pdfjsLib = await import("pdfjs-dist");
-  // CDN URL pinned to installed version — works in all environments (local, mobile,
-  // deployed) without needing a worker file in public/ or any bundler configuration.
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+  // new URL(..., import.meta.url) causes the bundler (webpack/Turbopack) to emit
+  // the worker as a same-origin chunk — avoids cross-origin module worker restrictions
+  // on mobile Safari and Android Chrome.
+  pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+    "pdfjs-dist/build/pdf.worker.min.mjs",
+    import.meta.url
+  ).href;
 
   const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
   const pages: string[] = [];

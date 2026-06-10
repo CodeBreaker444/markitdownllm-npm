@@ -702,7 +702,10 @@ function detectTableRegions(rows) {
 }
 async function pdfToMarkdown(arrayBuffer) {
   const pdfjsLib = await import('pdfjs-dist');
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+  pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+    "pdfjs-dist/build/pdf.worker.min.mjs",
+    import.meta.url
+  ).href;
   const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
   const pages = [];
   for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
