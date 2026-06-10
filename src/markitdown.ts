@@ -69,6 +69,7 @@ export class MarkItDown {
 
   async convert(file: File): Promise<DocumentConverterResult> {
     const streamInfo = getStreamInfo(file);
+    let lastError: unknown;
 
     for (const { converter } of this.converters) {
       if (converter.accepts(file, streamInfo)) {
@@ -77,11 +78,13 @@ export class MarkItDown {
           return { ...result, markdown: normalizeWhitespace(result.markdown) };
         } catch (err) {
           console.warn(`Converter ${converter.constructor.name} failed:`, err);
+          lastError = err;
         }
       }
     }
 
-    throw new Error(`No converter found for file: ${file.name}`);
+    const detail = lastError instanceof Error ? `: ${lastError.message}` : "";
+    throw new Error(`No converter found for file: ${file.name}${detail}`);
   }
 
   getSupportedExtensions(): string[] {

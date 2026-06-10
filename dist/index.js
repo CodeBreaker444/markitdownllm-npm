@@ -702,7 +702,7 @@ function detectTableRegions(rows) {
 }
 async function pdfToMarkdown(arrayBuffer) {
   const pdfjsLib = await import('pdfjs-dist');
-  pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "";
   const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
   const pages = [];
   for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
@@ -858,6 +858,7 @@ var MarkItDown = class {
   }
   async convert(file) {
     const streamInfo = getStreamInfo(file);
+    let lastError;
     for (const { converter } of this.converters) {
       if (converter.accepts(file, streamInfo)) {
         try {
@@ -865,10 +866,12 @@ var MarkItDown = class {
           return { ...result, markdown: normalizeWhitespace(result.markdown) };
         } catch (err) {
           console.warn(`Converter ${converter.constructor.name} failed:`, err);
+          lastError = err;
         }
       }
     }
-    throw new Error(`No converter found for file: ${file.name}`);
+    const detail = lastError instanceof Error ? `: ${lastError.message}` : "";
+    throw new Error(`No converter found for file: ${file.name}${detail}`);
   }
   getSupportedExtensions() {
     return Object.keys(EXT_TO_MIME).sort();

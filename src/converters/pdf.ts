@@ -167,7 +167,9 @@ function detectTableRegions(
 
 async function pdfToMarkdown(arrayBuffer: ArrayBuffer): Promise<string> {
   const pdfjsLib = await import("pdfjs-dist");
-  pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+  // Empty string = fake worker (runs on main thread) — universally compatible with
+  // mobile browsers that block module workers or can't load .mjs worker files.
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "";
 
   const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
   const pages: string[] = [];
